@@ -2,11 +2,16 @@ package com.droid.ray.droidsoundnotification;
 
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningServiceInfo;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.media.AudioAttributes;
+import android.media.AudioManager;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
@@ -25,12 +30,12 @@ public class DroidNotify extends PreferenceActivity {
     private Preference service;
     public static boolean turnOnScreenChecked;
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         try
         {
+
             addPreferencesFromResource(R.xml.preferences);
 
             service = (Preference) findPreference("service");

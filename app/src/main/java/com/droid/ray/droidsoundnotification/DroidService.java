@@ -4,6 +4,7 @@ import android.accessibilityservice.AccessibilityService;
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.annotation.SuppressLint;
 import android.app.KeyguardManager;
+import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +14,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -20,11 +22,14 @@ import android.net.Uri;
 import android.os.PowerManager;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
+import android.support.v4.app.NotificationCompat;
 import android.view.accessibility.AccessibilityEvent;
 
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import static com.droid.ray.droidsoundnotification.R.attr.icon;
 
 @SuppressLint("NewApi")
 public class DroidService extends AccessibilityService implements SensorEventListener, AudioManager.OnAudioFocusChangeListener {
@@ -72,10 +77,10 @@ public class DroidService extends AccessibilityService implements SensorEventLis
                 try {
                     waitingTimeOutNofitication = true;
                     timeSleep(2000);
+                    soundNotification(); // independente da configuracao, o som de notificação é emitido
                     if (DroidNotify.turnOnScreenChecked) {
                         turnOnScreen();
                     }
-                    sonsNotification(); // independente da configuracao, o som de notificação é emitido
                     timeSleep(2000);
                 } finally {
                     waitingTimeOutNofitication = false;
@@ -137,15 +142,19 @@ public class DroidService extends AccessibilityService implements SensorEventLis
         }
     }
 
-    private void sonsNotification() {
+    private void soundNotification() {
         try {
             Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
             Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
+            AudioAttributes audioAttributes = new AudioAttributes.Builder()
+                    .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
+                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                    .build();
+            r.setAudioAttributes(audioAttributes);
             r.play();
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     private int getTimeout() {
