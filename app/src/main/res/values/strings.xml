@@ -14,7 +14,7 @@
     <string name="set">OK</string>
     <string name="cancel">Cancelar</string>
     <string name="period">Período</string>
-    <string name="summarySelect">Toque aqui para selecionar os aplicativos que vão ligar a tela quando receber uma notificação</string>
-    <string name="setTurnOnScreen">Ligar a tela sempre</string>
+    <string name="summarySelect">Toque aqui para selecionar os aplicativos que vão emitir um som quando receber uma notificação</string>
+    <string name="setTurnOnScreen">Ligar a tela ao receber uma notificação</string>
 
 </resources>
