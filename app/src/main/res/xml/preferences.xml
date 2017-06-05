@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="@string/app_notification" >
+        <Preference
+            android:key="service"
+            android:title="@string/app_active"
+            android:summary="@string/app_deactive" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/app_config" >
+        <Preference
+            android:key="app"
+            android:title="@string/app_select"
+            android:summary="@string/summarySelect">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:targetPackage="com.droid.ray.droidsoundnotification"
+                android:targetClass="com.droid.ray.droidsoundnotification.DroidActivity" />
+        </Preference>
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="turnOnScreen"
+            android:title="@string/setTurnOnScreen" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

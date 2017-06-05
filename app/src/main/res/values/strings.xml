@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Droid Sound Notification</string>
+    <string name="description">Droid Sound Notification emite o som de notificação padrão do android quando recebe uma notificação dos aplicativos selecionados.</string>
+    <string name="app_active">Aplicativo ATIVADO</string>
+    <string name="app_deactive">Toque aqui para DESATIVAR</string>
+    <string name="app_inactive">Aplicativo DESATIVADO</string>
+    <string name="app_activate">Toque aqui para ATIVAR</string>
+    <string name="app_select">Selecione os aplicativos</string>
+    <string name="app_notification">Notificação</string>
+    <string name="app_apps">Aplicativos</string>
+    <string name="app_config">Configuração</string>
+    <string name="app_loading">Carregando ...</string>
+    <string name="set">OK</string>
+    <string name="cancel">Cancelar</string>
+    <string name="period">Período</string>
+    <string name="summarySelect">Toque aqui para selecionar os aplicativos que vão ligar a tela quando receber uma notificação</string>
+    <string name="setTurnOnScreen">Ligar a tela sempre</string>
+
+</resources>
