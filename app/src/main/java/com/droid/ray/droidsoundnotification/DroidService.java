@@ -4,6 +4,7 @@ import android.accessibilityservice.AccessibilityService;
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.annotation.SuppressLint;
 import android.app.KeyguardManager;
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -23,6 +24,7 @@ import android.os.PowerManager;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 import android.view.accessibility.AccessibilityEvent;
 
 import java.lang.reflect.Method;
@@ -64,8 +66,33 @@ public class DroidService extends AccessibilityService implements SensorEventLis
             SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
             String packageName = (String) event.getPackageName();
             if (mPrefs.getBoolean(packageName, false)) {
+                Notification notification = (Notification) event.getParcelableData();
+                CharSequence[] lines = notification.extras.getCharSequenceArray(Notification.EXTRA_TEXT_LINES);
+                int i = 0;
+                if (lines != null) {
+                    for (CharSequence msg : lines) {
+                        Log.d("Line " + i, (String) msg);
+                        i += 1;
+                    }
+                }
+
+                cancelAllNotification(getApplicationContext());
+
+
                 postMessageInThread();
             }
+        }
+    }
+
+    public static void cancelAllNotification(Context ctx) {
+        try {
+            String ns = Context.NOTIFICATION_SERVICE;
+            NotificationManager nMgr = (NotificationManager) ctx.getSystemService(ns);
+            nMgr.cancelAll();
+        }
+        catch (Exception ex)
+        {
+            Log.d("DroidMessage", ex.getMessage());
         }
     }
 
